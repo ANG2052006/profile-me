@@ -97,6 +97,49 @@
             height: 60px;
             border-radius: 50%;
         }
+
+
+        /* ==========  تصميم القائمة المنبثقة ========== */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .popup input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .popup button {
+            background: #25d366;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .popup .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -132,15 +175,46 @@
             <span>Threads</span>
             <i class="fa-brands fa-threads"></i>
         </a>
-        <a href="https://wa.me/01551866326" target="_blank">
+        <a href="https://wa.me/201551866326" target="_blank">
             <span>واتساب</span>
             <i class="fa-brands fa-whatsapp"></i>
         </a>
-        <a href="https://t.me/01551866326" target="_blank">
+        <a href="https://t.me/201551866326" target="_blank">
             <span>تليجرام</span>
             <i class="fa-brands fa-telegram"></i>
         </a>
     </div>
+
+
+    <!-- ========== القائمة المنبثقة ========== -->
+    <div class="popup" id="popup">
+        <span class="close" onclick="closePopup()">×</span>
+        <h3>إرسال رسالة واتساب</h3>
+        <input type="text" id="message" placeholder="اكتب رسالتك هنا...">
+        <button onclick="sendMessage()">إرسال</button>
+    </div>
+
+    <script>
+        function openPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function sendMessage() {
+            var message = document.getElementById("message").value;
+            var phoneNumber = "201551866326"; // رقمك مع كود الدولة بدون "+"
+            if (message.trim() !== "") {
+                var whatsappURL = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(message);
+                window.open(whatsappURL, "_blank");
+                closePopup();
+            } else {
+                alert("من فضلك اكتب رسالة قبل الإرسال!");
+            }
+        }
+    </script>
 
 </body>
 </html>
