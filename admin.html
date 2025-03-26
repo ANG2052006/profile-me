@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            direction: rtl;
+        }
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .preview {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .preview img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: none;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>لوحة التحكم</h2>
+
+        <!-- رفع صورة البروفايل -->
+        <div class="preview">
+            <img id="previewImage">
+        </div>
+        <label>رفع صورة البروفايل:</label>
+        <input type="file" id="profileImage" accept="image/*">
+
+        <!-- اسم المستخدم -->
+        <label>اسم المستخدم:</label>
+        <input type="text" id="username" placeholder="اكتب اسمك...">
+
+        <!-- البايو -->
+        <label>البايو:</label>
+        <textarea id="bio" placeholder="اكتب نبذة عنك..."></textarea>
+
+        <!-- لون الخلفية -->
+        <label>لون الخلفية:</label>
+        <input type="color" id="bgColor">
+
+        <!-- الروابط الاجتماعية -->
+        <label>رابط فيسبوك:</label>
+        <input type="text" id="facebook" placeholder="رابط فيسبوك">
+        
+        <label>رابط X (تويتر):</label>
+        <input type="text" id="x" placeholder="رابط X">
+        
+        <label>رابط إنستجرام:</label>
+        <input type="text" id="instagram" placeholder="رابط إنستجرام">
+        
+        <label>رابط سناب شات:</label>
+        <input type="text" id="snapchat" placeholder="رابط سناب شات">
+        
+        <label>رابط Threads:</label>
+        <input type="text" id="threads" placeholder="رابط Threads">
+        
+        <label>رقم واتساب:</label>
+        <input type="text" id="whatsapp" placeholder="رقم واتساب">
+        
+        <label>رابط تليجرام:</label>
+        <input type="text" id="telegram" placeholder="رابط تليجرام">
+
+        <!-- أزرار التحكم -->
+        <button onclick="saveSettings()">حفظ التعديلات</button>
+        <button onclick="resetSettings()">إعادة التعيين</button>
+    </div>
+
+    <script>
+        // تحميل البيانات عند فتح الصفحة
+        window.onload = function () {
+            let savedSettings = localStorage.getItem("siteSettings");
+            if (savedSettings) {
+                savedSettings = JSON.parse(savedSettings);
+                document.getElementById("previewImage").src = savedSettings.profileImage || "";
+                document.getElementById("previewImage").style.display = savedSettings.profileImage ? "block" : "none";
+                document.getElementById("username").value = savedSettings.username || "";
+                document.getElementById("bio").value = savedSettings.bio || "";
+                document.getElementById("bgColor").value = savedSettings.bgColor || "#ffffff";
+                document.getElementById("facebook").value = savedSettings.links.facebook || "";
+                document.getElementById("x").value = savedSettings.links.x || "";
+                document.getElementById("instagram").value = savedSettings.links.instagram || "";
+                document.getElementById("snapchat").value = savedSettings.links.snapchat || "";
+                document.getElementById("threads").value = savedSettings.links.threads || "";
+                document.getElementById("whatsapp").value = savedSettings.links.whatsapp || "";
+                document.getElementById("telegram").value = savedSettings.links.telegram || "";
+            }
+        };
+
+        // حفظ البيانات في LocalStorage
+        function saveSettings() {
+            let settings = {
+                profileImage: document.getElementById("previewImage").src,
+                username: document.getElementById("username").value,
+                bio: document.getElementById("bio").value,
+                bgColor: document.getElementById("bgColor").value,
+                links: {
+                    facebook: document.getElementById("facebook").value,
+                    x: document.getElementById("x").value,
+                    instagram: document.getElementById("instagram").value,
+                    snapchat: document.getElementById("snapchat").value,
+                    threads: document.getElementById("threads").value,
+                    whatsapp: document.getElementById("whatsapp").value,
+                    telegram: document.getElementById("telegram").value
+                }
+            };
+
+            localStorage.setItem("siteSettings", JSON.stringify(settings));
+            alert("تم حفظ التعديلات بنجاح!");
+        }
+
+        // إعادة التعيين
+        function resetSettings() {
+            localStorage.removeItem("siteSettings");
+            alert("تم إعادة تعيين الإعدادات!");
+            location.reload();
+        }
+
+        // عرض صورة البروفايل عند الاختيار
+        document.getElementById("profileImage").addEventListener("change", function (event) {
+            let file = event.target.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById("previewImage").src = e.target.result;
+                    document.getElementById("previewImage").style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+</body>
+</html>
