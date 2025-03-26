@@ -205,6 +205,17 @@
     </div>
 
     <script>
+        window.onload = function () {
+    let savedSettings = localStorage.getItem("siteSettings");
+    if (savedSettings) {
+        savedSettings = JSON.parse(savedSettings);
+        document.getElementById("profilePic").src = savedSettings.profileImage || "";
+        document.getElementById("usernameDisplay").textContent = savedSettings.username || "اسم المستخدم";
+        document.getElementById("bioDisplay").textContent = savedSettings.bio || "هنا يظهر البايو...";
+        document.body.style.backgroundColor = savedSettings.bgColor || "#ffffff";
+    }
+};
+        
         function openPopup() {
             document.getElementById("popup").style.display = "block";
         }
