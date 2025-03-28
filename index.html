@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile to cotact me</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.jpg">
     <style>
         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
 
         body {
             font-family: Arial, sans-serif;
-            background: #c7c2c2;
+            background: linear-gradient(-45deg, #fcfcfc, #000000, #ff40f9, #513600);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+
+/* تحريك الخلفية */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
             text-align: center;
             margin: 0;
             padding: 0;
@@ -39,6 +48,24 @@
             font-size: 18px;
             margin-bottom: 20px;
         }
+
+        .profile-pic, .bio {
+    opacity: 0; /* تخليهم غير مرئيين في البداية */
+    transform: translateY(10px); /* تبدأهم من تحت شوية */
+    animation: slideUp 0.6s ease-out forwards; /* تضيف الأنيميشن */
+}
+
+/* تعريف الأنيميشن */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
         .social-links {
             width: 90%;
