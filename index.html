@@ -12,10 +12,10 @@
             font-family: Arial, sans-serif;
             background: linear-gradient(-45deg, #fcfcfc, #000000, #ff40f9, #513600);
     background-size: 400% 400%;
-    animation: gradientAnimation 10s ease infinite;
+    animation: backgroundWave 6s ease infinite;
 
 /* تحريك الخلفية */
-@keyframes gradientAnimation {
+@keyframes backgroundWave {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
@@ -49,7 +49,7 @@
             margin-bottom: 20px;
         }
 
-        .profile-pic, .bio {
+        .profile-pic, .bio, .name {
     opacity: 0; /* تخليهم غير مرئيين في البداية */
     transform: translateY(10px); /* تبدأهم من تحت شوية */
     animation: slideUp 0.6s ease-out forwards; /* تضيف الأنيميشن */
