@@ -92,14 +92,13 @@
 
         @keyframes moveToText {
     0% { transform: translateX(0) scale(1); }
-    30% { transform: translateX(15px) scale(1.1); } /* تتحرك لليمين وتكبر */
-    60% { transform: translateX(0) scale(1); }
-    100% { transform: translateX(15px) scale(1.1); }
+    50% { transform: translateX(15px) scale(1.1); } /* تتحرك قليلاً لليمين */
+    100% { transform: translateX(0) scale(1); }
 }
 
 .moving {
     animation: moveToText 0.6s ease-in-out forwards;
-}
+            }
 
         .talk-btn {
             display: flex;
@@ -326,21 +325,24 @@
     event.preventDefault(); // يمنع القائمة من الظهور
 });
 
-     document.querySelectorAll(".social-links a").forEach(link => {
+        document.querySelectorAll(".social-links a").forEach(link => {
     link.addEventListener("click", function(event) {
         event.preventDefault(); // إيقاف التوجيه الفوري
         let icon = this.querySelector("i"); // استهداف الأيقونة داخل الرابط
         let targetURL = this.href;
 
-        // إضافة الحركة للأيقونة
-        icon.classList.add("jumping");
+        // إزالة أي حركة سابقة ثم إضافة التأثير الجديد
+        icon.classList.remove("moving");
+        void icon.offsetWidth; // إعادة ضبط الـ CSS (Trick لإعادة تشغيل الأنيميشن)
+        icon.classList.add("moving");
 
         // بعد انتهاء الحركة، يتم التوجيه للرابط
         setTimeout(() => {
             window.location.href = targetURL;
         }, 600); // مدة الحركة (600ms)
     });
-});       
+});
+    
     </script>
 
 </body>
