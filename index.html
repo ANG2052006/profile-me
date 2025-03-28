@@ -10,15 +10,15 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(-45deg, #fcfcfc, #000000, #ff40f9, #513600);
-    background-size: 400% 400%;
-    animation: backgroundWave 1s ease infinite;
+            background: linear-gradient(45deg, #fcfcfc, #000000, #ff40f9, #513600);
+    background-size: 200% 200%;
+    animation: moveBackground 5s infinite alternate ease-in-out;
 
 /* تحريك الخلفية */
-@keyframes backgroundWave {
-    0% { background-position: 0% 50%; }
+@keyframes moveBackground {
+    0% { background-position: 0% 0%; }
     50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    100% { background-position: 0% 0%; }
 }
             text-align: center;
             margin: 0;
@@ -255,6 +255,10 @@
                 alert("من فضلك اكتب رسالة قبل الإرسال!");
             }
         }
+
+        document.addEventListener("contextmenu", function (event) {
+    event.preventDefault(); // يمنع القائمة من الظهور
+});
     </script>
 
 </body>
